@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#FC7D0B"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Shopping"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="179dp"
+            tools:layout_editor_absoluteY="15dp" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="409dp"
+        android:layout_height="685dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        tools:ignore="MissingConstraints">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="204dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="SpeakableTextPresentCheck">
+            </androidx.viewpager.widget.ViewPager>
+
+            <LinearLayout
+                android:id="@+id/viewGroup"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="8dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/viewPager">
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_goods_subname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="TextView"
+                android:textColor="@android:color/holo_red_dark"
+                android:textSize="10sp"
+                app:layout_constraintStart_toStartOf="@+id/viewPager"
+                app:layout_constraintTop_toBottomOf="@+id/tv_goods_name" />
+
+            <TextView
+                android:id="@+id/tv_goods_price"
+                android:layout_width="300dp"
+                android:layout_height="25dp"
+                android:background="@drawable/textview_border"
+                android:gravity="center"
+                android:paddingLeft="5dp"
+                android:text="TextView"
+                android:textAlignment="viewStart"
+                android:textColor="#DF550B"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/TextView3"
+                app:layout_constraintTop_toTopOf="@+id/TextView3"
+                tools:ignore="RtlCompat" />
+
+            <TextView
+                android:id="@+id/tv_goods_stock"
+                android:layout_width="300dp"
+                android:layout_height="25dp"
+                android:layout_x="76dp"
+                android:layout_y="-28dp"
+                android:background="@drawable/textview_border"
+                android:gravity="center"
+                android:paddingLeft="5dp"
+                android:text="TextView"
+                android:textAlignment="viewStart"
+                app:layout_constraintStart_toEndOf="@+id/TextView5"
+                app:layout_constraintTop_toBottomOf="@+id/tv_brand"
+                tools:ignore="RtlCompat" />
+
+            <TextView
+                android:id="@+id/tv_goods_name"
+                android:layout_width="412dp"
+                android:layout_height="25dp"
+                android:gravity="center"
+                android:text="TextView"
+                android:textAlignment="viewStart"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/viewPager"
+                app:layout_constraintTop_toBottomOf="@+id/TextView8"
+                tools:ignore="RtlCompat" />
+
+            <TextView
+                android:id="@+id/tv_goods_code"
+                android:layout_width="60dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="5dp"
+                android:gravity="center"
+                android:text="TextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/viewPager" />
+
+            <TextView
+                android:id="@+id/tv_warranty"
+                android:layout_width="300dp"
+                android:layout_height="25dp"
+                android:background="@drawable/textview_border"
+                android:gravity="center"
+                android:paddingLeft="5dp"
+                android:text="TextView"
+                android:textAlignment="viewStart"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/tv_goods_price"
+                app:layout_constraintTop_toBottomOf="@+id/tv_goods_price"
+                tools:ignore="RtlCompat" />
+
+            <TextView
+                android:id="@+id/tv_brand"
+                android:layout_width="300dp"
+                android:layout_height="25dp"
+                android:background="@drawable/textview_border"
+                android:gravity="center"
+                android:paddingLeft="5dp"
+                android:text="TextView"
+                android:textAlignment="viewStart"
+                app:layout_constraintStart_toEndOf="@+id/TextView4"
+                app:layout_constraintTop_toBottomOf="@+id/tv_warranty"
+                tools:ignore="RtlCompat" />
+
+            <TextView
+                android:id="@+id/tv_discount"
+                android:layout_width="300dp"
+                android:layout_height="25dp"
+                android:background="@drawable/textview_border"
+                android:gravity="center"
+                android:paddingLeft="5dp"
+                android:text="TextView"
+                android:textAlignment="viewStart"
+                app:layout_constraintStart_toStartOf="@+id/tv_goods_stock"
+                app:layout_constraintTop_toBottomOf="@+id/tv_goods_stock"
+                tools:ignore="RtlCompat" />
+
+            <WebView
+                android:id="@+id/web_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_x="0dp"
+                android:layout_y="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_discount" />
+
+            <TextView
+                android:id="@+id/TextView8"
+                android:layout_width="43dp"
+                android:layout_height="25dp"
+                android:gravity="center"
+                android:text="品號："
+                app:layout_constraintEnd_toStartOf="@+id/tv_goods_code"
+                app:layout_constraintTop_toTopOf="@+id/tv_goods_code" />
+
+            <TextView
+                android:id="@+id/TextView3"
+                android:layout_width="100dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/textview_background"
+                android:gravity="center"
+                android:text=" 商品價格"
+                android:textAlignment="viewStart"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/tv_goods_subname"
+                app:layout_constraintTop_toBottomOf="@+id/tv_goods_subname"
+                tools:ignore="RtlCompat" />
+
+            <TextView
+                android:id="@+id/TextView6"
+                android:layout_width="100dp"
+                android:layout_height="25dp"
+                android:background="@drawable/textview_background"
+                android:gravity="center"
+                android:text=" 商品數量"
+                android:textAlignment="viewStart"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/TextView5"
+                app:layout_constraintTop_toBottomOf="@+id/TextView5"
+                tools:ignore="RtlCompat" />
+
+            <TextView
+                android:id="@+id/TextView5"
+                android:layout_width="100dp"
+                android:layout_height="25dp"
+                android:background="@drawable/textview_background"
+                android:gravity="center"
+                android:text=" 商品品牌"
+                android:textAlignment="viewStart"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/TextView4"
+                app:layout_constraintTop_toBottomOf="@+id/TextView4"
+                tools:ignore="RtlCompat" />
+
+            <TextView
+                android:id="@+id/TextView4"
+                android:layout_width="100dp"
+                android:layout_height="25dp"
+                android:background="@drawable/textview_background"
+                android:gravity="center"
+                android:text=" 保固日期"
+                android:textAlignment="viewStart"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/TextView3"
+                app:layout_constraintTop_toBottomOf="@+id/TextView3"
+                tools:ignore="RtlCompat" />
+
+            <TextView
+                android:id="@+id/TextView7"
+                android:layout_width="100dp"
+                android:layout_height="25dp"
+                android:background="@drawable/textview_background"
+                android:gravity="center"
+                android:text=" 特惠商品"
+                android:textAlignment="viewStart"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/TextView6"
+                app:layout_constraintTop_toBottomOf="@+id/TextView6"
+                tools:ignore="RtlCompat" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:background="#F0F0F0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/bt_add_cart"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="50dp"
+            android:background="@drawable/bg_settlement"
+            android:text="加入購物車"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ib_cart"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/bt_add_buy"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/bg_settlement"
+            android:text="直接購買"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/bt_add_cart"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/ib_cart"
+            android:layout_width="42dp"
+            android:layout_height="41dp"
+            android:layout_marginStart="40dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/ic_shopping_cart" />
+
+        <TextView
+            android:id="@+id/tv_number"
+            android:layout_width="19dp"
+            android:layout_height="21dp"
+            android:layout_marginStart="70dp"
+            android:background="@drawable/count_dot"
+            android:gravity="center"
+            android:text="99"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="gone"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

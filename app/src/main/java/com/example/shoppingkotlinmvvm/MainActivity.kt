@@ -2,7 +2,12 @@ package com.example.shoppingkotlinmvvm
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.KeyEvent
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -12,7 +17,8 @@ import com.example.shoppingkotlinmvvm.databinding.ActivityMainBinding
 import com.example.shoppingkotlinmvvm.shoppingCart.ShoppingCartActivity
 import java.util.*
 
-class MainActivity : AppCompatActivity(), IRecyclerViewClickListener, View.OnClickListener{
+class MainActivity : AppCompatActivity(), IRecyclerViewClickListener, View.OnClickListener,
+    TextView.OnEditorActionListener, TextWatcher {
 
     var viewModel: MainViewModel? = null
 
@@ -28,11 +34,11 @@ class MainActivity : AppCompatActivity(), IRecyclerViewClickListener, View.OnCli
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.layAccount.setOnClickListener(this) //會員中心
-        binding.btAccount.setOnClickListener(this)
-        binding.tvAccount.setOnClickListener(this)
-        binding.btShoppingCar.setOnClickListener(this)  //購物車
-        binding.tvShoppingCar.setOnClickListener(this)
+        initListener()
+
+        //輸入完收鍵盤
+        binding.edSearch.setImeOptions(EditorInfo.IME_ACTION_DONE)
+        binding.edSearch.setSingleLine()
 
         //RecyclerView必要設定
         binding.recycler.setHasFixedSize(true)  //要設定固定大小
@@ -70,7 +76,7 @@ class MainActivity : AppCompatActivity(), IRecyclerViewClickListener, View.OnCli
 
         binding.recycler.addOnScrollListener(object : EndlessRecyclerOnScrollListener() {
             override fun onLoadMore() {
-                viewModel!!.onLoadMore()
+                viewModel!!.onLoadMore(binding.edSearch.text.toString())
             }
         })
 
@@ -83,6 +89,19 @@ class MainActivity : AppCompatActivity(), IRecyclerViewClickListener, View.OnCli
                 binding.tvNumber.setVisibility(View.GONE)
             }
         })
+    }
+
+    fun initListener(){
+        binding.layAccount.setOnClickListener(this) //會員中心
+        binding.btAccount.setOnClickListener(this)
+        binding.tvAccount.setOnClickListener(this)
+        binding.btShoppingCar.setOnClickListener(this)  //購物車
+        binding.tvShoppingCar.setOnClickListener(this)
+        binding.ibGoodsSearch.setOnClickListener(this)
+        binding.edSearch.setOnEditorActionListener(this)
+        binding.edSearch.addTextChangedListener(this)
+        binding.ibDelete.setOnClickListener(this)
+        binding.ibReturn.setOnClickListener(this)
     }
 
     override fun onStart() {
@@ -123,6 +142,26 @@ class MainActivity : AppCompatActivity(), IRecyclerViewClickListener, View.OnCli
                 val intent = Intent(this@MainActivity, ShoppingCartActivity::class.java)
                 startActivity(intent)
             }
+            R.id.ib_goodsSearch ->{
+                binding.ibReturn.setVisibility(View.VISIBLE)
+                binding.ibDelete.setVisibility(View.VISIBLE)
+                binding.edSearch.setVisibility(View.VISIBLE)
+                binding.tvShopping.setVisibility(View.GONE)
+                binding.ibGoodsSearch.setVisibility(View.GONE)
+            }
+            R.id.ib_delete ->{
+                if (binding.edSearch.getEditableText().length > 0) {
+                    binding.edSearch.getText().clear()
+                }
+            }
+            R.id.ib_return ->{
+                binding.ibReturn.setVisibility(View.GONE)
+                binding.ibDelete.setVisibility(View.GONE)
+                binding.edSearch.setVisibility(View.GONE)
+                binding.tvShopping.setVisibility(View.VISIBLE)
+                binding.ibGoodsSearch.setVisibility(View.VISIBLE)
+                viewModel!!.search(null)
+            }
         }
     }
 
@@ -158,4 +197,24 @@ class MainActivity : AppCompatActivity(), IRecyclerViewClickListener, View.OnCli
          */
         abstract fun onLoadMore()
     }
+
+    override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
+        if (actionId == EditorInfo.IME_ACTION_DONE) {  //按Enter
+            viewModel!!.search(binding.edSearch.getText().toString())
+        }
+        return false
+    }
+
+    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+    }
+
+    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+    }
+
+    override fun afterTextChanged(s: Editable?) {  //輸入框文字改變
+        if (!binding.edSearch.getText().toString().isEmpty()) {
+            binding.edSearch.setCompoundDrawables(null, null, null, null) //隱藏輸入框內放大鏡
+        }
+    }
 }
+

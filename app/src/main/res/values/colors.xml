@@ -8,8 +8,4 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <!--購物車使用新增顏色-->
-    <color name="colorPrimary">#FFF</color>
-    <color name="colorPrimaryDark">#FFF</color>
-    <color name="colorAccent">#D81B60</color>
 </resources>

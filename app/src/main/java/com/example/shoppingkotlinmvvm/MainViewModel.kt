@@ -1,6 +1,7 @@
 package com.example.shoppingkotlinmvvm
 
 import android.content.Context
+import android.widget.EditText
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.shoppingkotlinmvvm.bean.RowData
@@ -30,18 +31,18 @@ class MainViewModel : ViewModel() {
 
     fun start(context: Context){
         //撈API
-        getData(myPage)
-
+        getData(myPage, null, false)
         dbHelper = ShoppingCartDatabaseHelper(context)
-
         calculateShoppingCartQuantity()
     }
 
-    fun getData(page: String?) {
+    fun getData(page: String?, goodsName: String?, isClear: Boolean) {
         try {
             val jsonObject = JSONObject()
             jsonObject.put("page", page) //取的產品列表第幾頁
-            jsonObject.toString()
+            if (goodsName != null) {
+                jsonObject.put("goodsName", goodsName) //取得產品名稱
+            }
 
             HttpUtil.httpPost(jsonObject, HttpUtil.GOODS_LIST_API,
                 object : IHttpCallback {
@@ -51,6 +52,9 @@ class MainViewModel : ViewModel() {
                         println("bbb: $rowData")
 
                         totalCnt = rowData.data.obj.totalCnt
+                        if (isClear) {
+                            list.clear() //資料清空,不然會累加
+                        }
                         list.addAll(rowData.data.obj.goodsInfoList)
                         listLiveData.postValue(list)
                     }
@@ -65,17 +69,22 @@ class MainViewModel : ViewModel() {
         adapterChangeLiveData.postValue(isAdapterChange)
     }
 
-    fun onLoadMore() {
+    fun onLoadMore(goodsName: String?) {
         loadStateLiveData.postValue(IRecyclerViewAdapterLoad.LOADING)
         if (list.size < totalCnt) {
             //加載下一頁
             myPage = (myPage.toInt() + 1).toString()
-            getData(myPage)
+            getData(myPage, goodsName, false)
             loadStateLiveData.postValue(IRecyclerViewAdapterLoad.LOADING_COMPLETE)
         } else {
             // 顯示加載到底的提示
             loadStateLiveData.postValue(IRecyclerViewAdapterLoad.LOADING_END)
         }
+    }
+
+    fun search(goodsName: String?){
+        myPage = "1"
+        getData(myPage, goodsName, true)
     }
 
     //購物車總數量統計

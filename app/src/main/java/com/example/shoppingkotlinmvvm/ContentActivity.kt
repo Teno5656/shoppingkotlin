@@ -35,7 +35,7 @@ class ContentActivity: AppCompatActivity() {
     //定義一組imageView數組,來存放生成的小圓點
     private var imageViews: Array<ImageView?>? = null
 
-    var goodsName = "GoodsName not set" //當沒有收到資料的情況下,會收到這裡的預設字
+    var goodsName = "GoodsName not set"
     var goodsSubName = "goodsSubName"
     var goodsPrice = "goodsPrice"
     var salePrice = "salePrice"
